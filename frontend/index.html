@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuAssist AI - Customer Support Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">🤖 DocuAssist AI</h1>
+                <p class="tagline">Intelligent Customer Support</p>
+            </div>
+        </header>
+
+        <!-- Main Chat Application -->
+        <main class="main-content">
+            <!-- Chat Messages Area -->
+            <div class="chat-container">
+                <div id="messages" class="messages-area">
+                    <div class="welcome-message">
+                        <h2>🎯 Welcome to DocuAssist AI</h2>
+                        <p>Ask me anything about our products and services. I'm here to help!</p>
+                        <div class="quick-examples">
+                            <p class="section-label">Quick Examples - Click to Ask:</p>
+                            <button class="example-btn" onclick="executeQuery('How do I reset my password?')">
+                                🔐 Password Reset
+                            </button>
+                            <button class="example-btn" onclick="executeQuery('What are your pricing plans and costs?')">
+                                💰 Pricing & Billing
+                            </button>
+                            <button class="example-btn" onclick="executeQuery('How can I contact your support team?')">
+                                📞 Contact Support
+                            </button>
+                            <button class="example-btn" onclick="executeQuery('How do I create a new account?')">
+                                📝 Account Creation
+                            </button>
+                            <button class="example-btn" onclick="executeQuery('What security features do you have?')">
+                                🔒 Security & 2FA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <form id="queryForm" class="query-form" onsubmit="submitQuery(event)">
+                        <input
+                            type="text"
+                            id="queryInput"
+                            class="query-input"
+                            placeholder="Type your question here..."
+                            autocomplete="off"
+                            required
+                        >
+                        <button type="submit" class="send-button" id="sendBtn">
+                            <span>Send</span>
+                            <span class="send-icon">→</span>
+                        </button>
+                    </form>
+                    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                        <span class="spinner"></span>
+                        <span>Processing your query...</span>
+                    </div>
+                </div>
+
+                <!-- Metrics Display -->
+                <div id="metricsContainer" class="metrics-container" style="display: none;">
+                    <details>
+                        <summary>📊 Performance Metrics</summary>
+                        <div class="metrics-content">
+                            <div class="metric-item">
+                                <span class="metric-label">Retrieval Time:</span>
+                                <span id="retrievalLatency" class="metric-value">-</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Generation Time:</span>
+                                <span id="generationLatency" class="metric-value">-</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Total Time:</span>
+                                <span id="totalLatency" class="metric-value">-</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Documents Retrieved:</span>
+                                <span id="docCount" class="metric-value">-</span>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Sidebar with Features -->
+            <aside class="sidebar">
+                <section class="sidebar-section">
+                    <h3>About This Chat</h3>
+                    <p>DocuAssist uses AI and semantic search to provide accurate answers based on our documentation.</p>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3>How It Works</h3>
+                    <ol>
+                        <li><strong>Semantic Search:</strong> Your query is converted to embeddings</li>
+                        <li><strong>Document Retrieval:</strong> Most relevant docs are found</li>
+                        <li><strong>AI Generation:</strong> Response is generated from context</li>
+                        <li><strong>Your Feedback:</strong> Helps us improve continuously</li>
+                    </ol>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3>System Status</h3>
+                    <div id="systemStatus" class="status-indicator healthy">
+                        <span class="status-dot"></span>
+                        <span id="statusText">Healthy</span>
+                    </div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3>Settings</h3>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="showMetrics" checked>
+                        Show Performance Metrics
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="showSources" checked>
+                        Show Source Documents
+                    </label>
+                </section>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
